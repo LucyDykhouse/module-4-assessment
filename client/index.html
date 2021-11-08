@@ -2,30 +2,105 @@
 <html>
   <head>
     <title>Back End Assessment</title>
+    <link rel="stylesheet" href="../styles.css"/>
   </head>
   <body class="container">
-    <button id="complimentButton">Get a compliment</button>
-    <button id="fortuneButton">Get a fortune</button>
 
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script>
-      document.getElementById("complimentButton").onclick = function () {
-        axios.get("http://localhost:4000/api/compliment/")
-            .then(function (response) {
-              const data = response.data;
-              alert(data);
-            });
-      };
-    </script>
+    <!--Define user inputs-->
+    <div id="user-inputs">
 
-    <script>
-      document.getElementById("fortuneButton").onclick = function () {
-        axios.get("http://localhost:4000/api/fortune/")
-            .then(function (response) {
-              const data = response.data;
-              alert(data);
-            });
-      };
-    </script>
+      <!--Define buttons-->
+      <button id="complimentButton">Get a compliment</button>
+      <button id="fortuneButton">Get a fortune</button>
+
+      <!--Define forms-->
+      <form id="date-form">
+        <input id="month-list" type="text" value="November">
+        <input id="date-list" type="text" value="11/8 - 11/14">
+        <input type="submit" value="Submit">
+      </form>
+
+      <!--Script to handle compliment button-->
+      <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+      <script>
+        document.getElementById("complimentButton").onclick = function () {
+          axios.get("http://localhost:4000/api/compliment/")
+              .then(function (response) {
+                const data = response.data;
+                alert(data);
+              });
+        };
+      </script>
+
+      <!--Script to handle fortune button-->
+      <script>
+        document.getElementById("fortuneButton").onclick = function () {
+          axios.get("http://localhost:4000/api/fortune/")
+              .then(function (response) {
+                const data = response.data;
+                alert(data);
+              });
+        };
+      </script>
+
+      <!--Script to handle entered dates-->
+      <script>
+        const dateForm = document.getElementById("date-form");
+        dateForm.addEventListener('submit', (evt) => {
+          evt.preventDefault();
+          let monthValue = document.querySelector("#month-list");
+          let dateValue = document.querySelector("#date-list");
+          let month = document.querySelector("#month");
+          let dates = document.querySelector("#dates");
+          console.log(monthValue.value);
+          month.textContent = monthValue.value;
+          dates.textContent = dateValue.value;
+
+          monthValue.value = "";
+          dateValue.value = "";
+
+        });
+      </script>
+
+
+    </div>
+
+    <!--Script to construct calendar-->
+    <header class="title"> 
+      <h1 id="month">Month</h1>
+      <h3 id="dates">Dates</h3>
+    </header>
+    <div class="days-list">
+      <section class="day-box">
+        <div id="Monday">Monday</div>
+        <div class="day-activities">
+        </div>
+      </section>
+      <section class="day-box">
+        <div id="Tuesday">Tuesday</div>
+        <div class="day-activities">
+        </div>
+      </section>
+      <section class="day-box">
+        <div id="Wednesday">Wednesday</div>
+        <div class="day-activities">
+        </div>
+      </section>
+      <section class="day-box">
+        <div id="Thursday">Thursday</div>
+        <div class="day-activities">
+        </div>
+      </section>
+      <section class="day-box">
+        <div id="Friday">Friday</div>
+        <div class="day-activities">
+        </div>
+      </section>
+      <section class="day-box">
+        <div id="Weekend">Weekend</div>
+        <div class="day-activities">
+        </div>
+      </section>
+    </div>
   </body>
 </html>

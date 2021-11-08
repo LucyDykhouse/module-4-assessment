@@ -28,6 +28,8 @@ app.get("/api/fortune", (req, res) => {
   const fortunes = ["A pleasant surprise is waiting for you.",
 					 "All your hard work will soon pay off.",
 					 "Congratulations! You are on your way.",
+           "Imagination rules the world.",
+           "Pick battles big enough to matter, small enough to win."
   ];
 
   // Choose random fortune
@@ -37,5 +39,11 @@ app.get("/api/fortune", (req, res) => {
   res.status(200).send(randomFortune);
   
 });
+
+// Set calendar month and dates
+
+
+
+
 
 app.listen(4000, () => console.log("Server running on 4000"));
