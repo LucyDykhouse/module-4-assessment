@@ -20,6 +20,20 @@
         <input type="submit" value="Submit">
       </form>
 
+      <form id="event-form">
+        <input id="event" type="text" value="Enter event here">
+        <select id="event-day" name="days">
+          <option value="monday">Monday</option>
+          <option value="tuesday">Tuesday</option>
+          <option value="wednesday">Wednesday</option>
+          <option value="thursday">Thursday</option>
+          <option value="friday">Friday</option>
+          <option value="weekend">Weekend</option>
+        </select>
+        <input id="event-time" type="text" value="10:00">
+        <input type="submit" value="Submit">
+      </form>
+
       <!--Script to handle compliment button-->
       <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
       <script>
@@ -62,6 +76,42 @@
         });
       </script>
 
+      <!--Script to post an event to the calendar-->
+      <script>
+        const eventForm = document.querySelector("#event-form");
+
+        const createEvt = (body) => {
+          axios.post("http://localhost:4000/api/events/", body)
+               .then(function(res) {
+                  let newListItem = document.createElement('li');
+                  newListItem.textContent = `${res.data.time}: ${res.data.name}`;
+                  let dayOfEvent = document.querySelector(`#${res.data.day}-ul`);
+                  dayOfEvent.appendChild(newListItem);
+                });
+        }
+
+        function submitHandler(e) {
+        e.preventDefault();
+        let eventBody = document.querySelector("#event");
+        let eventDay = document.querySelector("#event-day");
+        let eventTime = document.querySelector("#event-time");
+
+        let bodyObj = {
+          evtName: eventBody.value,
+          evtDay: eventDay.value,
+          evtTime: eventTime.value
+        };
+
+        createEvt(bodyObj);
+
+        eventBody.value = "";
+        eventDay.value = "monday";
+        eventTime.value = "";
+        }
+
+        eventForm.addEventListener('submit', submitHandler);
+      </script>
+
 
     </div>
 
@@ -74,31 +124,37 @@
       <section class="day-box">
         <div id="Monday">Monday</div>
         <div class="day-activities">
+          <ul id="monday-ul"></ul>
         </div>
       </section>
       <section class="day-box">
         <div id="Tuesday">Tuesday</div>
         <div class="day-activities">
+          <ul id="tuesday-ul"></ul>
         </div>
       </section>
       <section class="day-box">
         <div id="Wednesday">Wednesday</div>
         <div class="day-activities">
+          <ul id="wednesday-ul"></ul>
         </div>
       </section>
       <section class="day-box">
         <div id="Thursday">Thursday</div>
         <div class="day-activities">
+          <ul id="thursday-ul"></ul>
         </div>
       </section>
       <section class="day-box">
         <div id="Friday">Friday</div>
         <div class="day-activities">
+          <ul id="friday-ul"></ul>
         </div>
       </section>
       <section class="day-box">
         <div id="Weekend">Weekend</div>
         <div class="day-activities">
+          <ul id="weekend-ul"></ul>
         </div>
       </section>
     </div>

@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const evtList = [];
 
 const app = express();
 
@@ -40,7 +41,19 @@ app.get("/api/fortune", (req, res) => {
   
 });
 
-// Set calendar month and dates
+// Post calendar events
+app.post("/api/events/", (req, res) => {
+  let {evtName, evtDay, evtTime} = req.body;
+  let newEvt = {
+    id: evtList.length + 1,
+    day: evtDay,
+    name: evtName,
+    time: evtTime
+  };
+  evtList.push(newEvt);
+  res.status(200).send(newEvt);
+});
+
 
 
 
