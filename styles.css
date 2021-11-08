@@ -38,3 +38,9 @@
     font: 400 30px 'calibri';
     border-bottom: 2px solid black;
 }
+
+#user-inputs {
+    display: flex;
+    align-items: center;
+    margin: 5px;
+}

@@ -12,16 +12,19 @@
       <!--Define buttons-->
       <button id="complimentButton">Get a compliment</button>
       <button id="fortuneButton">Get a fortune</button>
+      <button id="motivationButton">Get a motivational quote</button>
 
       <!--Define forms-->
       <form id="date-form">
         <input id="month-list" type="text" value="November">
+        <label for="month-list">Set calendar dates: </label>
         <input id="date-list" type="text" value="11/8 - 11/14">
         <input type="submit" value="Submit">
       </form>
 
       <form id="event-form">
         <input id="event" type="text" value="Enter event here">
+        <label for="event">Write your event: </label>
         <select id="event-day" name="days">
           <option value="monday">Monday</option>
           <option value="tuesday">Tuesday</option>
@@ -50,6 +53,17 @@
       <script>
         document.getElementById("fortuneButton").onclick = function () {
           axios.get("http://localhost:4000/api/fortune/")
+              .then(function (response) {
+                const data = response.data;
+                alert(data);
+              });
+        };
+      </script>
+
+      <!--Script to handle motivation button-->
+      <script>
+        document.getElementById("motivationButton").onclick = function () {
+          axios.get("http://localhost:4000/api/motivation/")
               .then(function (response) {
                 const data = response.data;
                 alert(data);

@@ -29,9 +29,9 @@ app.get("/api/compliment", (req, res) => {
 app.get("/api/fortune", (req, res) => {
   const fortunes = ["A pleasant surprise is waiting for you.",
 					 "All your hard work will soon pay off.",
-					 "Congratulations! You are on your way.",
-           "Imagination rules the world.",
-           "Pick battles big enough to matter, small enough to win."
+					 "Everywhere you choose to go, friendly faces will greet you.",
+           "From now on your kindness will lead you to success.",
+           "New ideas could be profitable."
   ];
 
   // Choose random fortune
@@ -40,6 +40,22 @@ app.get("/api/fortune", (req, res) => {
 
   res.status(200).send(randomFortune);
   
+});
+
+// Request for motivational quote
+app.get("/api/motivation", (req, res) => {
+  const quotes = ["Make each day your masterpiece.",
+					 "Congratulations! You are on your way.",
+					 "Pick battles big enough to matter, small enough to win.",
+           "Miles are covered one step at a time.",
+           "Success is a journey, not a destination."
+  ];
+
+  // Choose a random quote
+  let randomIndex = Math.floor(Math.random() * quotes.length);
+  let randomQuote = quotes[randomIndex];
+
+  res.status(200).send(randomQuote);
 });
 
 // Post calendar events
