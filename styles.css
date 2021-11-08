@@ -1,3 +1,16 @@
+button {
+    margin: 2px;
+}
+
+label {
+    font-style: 'calibri';
+    font-size: 15px; 
+}
+
+input {
+    margin: 5px;
+}
+
 .title h1 {
     font: 600 60px 'calibri';
     text-align: center;
@@ -32,15 +45,15 @@
     font-size: 14px;
 }
 
+#complimentButton, #fortuneButton, #motivationButton {
+    margin: 5px;
+    font-style: 'calibri';
+    font-size: 15px;
+}
+
 #Monday, #Tuesday, #Wednesday, #Thursday, #Friday, #Weekend {
     padding: 5px 5px 2px;
     text-align: center;
     font: 400 30px 'calibri';
     border-bottom: 2px solid black;
-}
-
-#user-inputs {
-    display: flex;
-    align-items: center;
-    margin: 5px;
 }

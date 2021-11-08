@@ -16,15 +16,15 @@
 
       <!--Define forms-->
       <form id="date-form">
-        <input id="month-list" type="text" value="November">
         <label for="month-list">Set calendar dates: </label>
+        <input id="month-list" type="text" value="November">
         <input id="date-list" type="text" value="11/8 - 11/14">
         <input type="submit" value="Submit">
       </form>
 
       <form id="event-form">
-        <input id="event" type="text" value="Enter event here">
         <label for="event">Write your event: </label>
+        <input id="event" type="text" value="Enter event here">
         <select id="event-day" name="days">
           <option value="monday">Monday</option>
           <option value="tuesday">Tuesday</option>
@@ -113,12 +113,13 @@
                   <button onclick="deleteEvt(${evt.id})">cancel</button>
                   <button onclick="updateEvt(${evt.id})">mark complete</button>`;
           } else {
-            newEvt.innerHTML = `<s>${evt.time}: ${evt.name}</s>
-                  <button onclick="deleteEvt(${evt.id})">cancel</button>`;
+            newEvt.innerHTML = `<s>${evt.time}: ${evt.name}</s>`
           };
+
         let dayOfEvent = document.querySelector(`#${evt.day}-ul`);
-        dayOfEvent.appendChild(newEvt);       
+        dayOfEvent.appendChild(newEvt);  
         };
+        
       </script>
 
       <!--Script to post an event to the calendar-->
