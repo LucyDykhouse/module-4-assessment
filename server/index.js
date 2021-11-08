@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
-const evtList = [];
+let eventList = [];
+let evtCount = 0;
 
 const app = express();
 
@@ -45,18 +46,33 @@ app.get("/api/fortune", (req, res) => {
 app.post("/api/events/", (req, res) => {
   let {evtName, evtDay, evtTime} = req.body;
   let newEvt = {
-    id: evtList.length + 1,
+    id: evtCount + 1,
     day: evtDay,
     name: evtName,
-    time: evtTime
+    time: evtTime,
+    status: "unchecked"
   };
-  evtList.push(newEvt);
-  res.status(200).send(newEvt);
+  evtCount++;
+  eventList.push(newEvt);
+  res.status(200).send(eventList);
 });
 
+// Delete calendar events
+app.delete('/api/events/:id', (req, res) => {
+  const eventIdx = eventList.findIndex((evt) => {
+    return evt.id === +req.params.id;
+  });
+  eventList.splice(eventIdx, 1);
+  res.status(200).send(eventList);
+});
 
-
-
-
+// Mark event complete
+app.put('/api/events/:id', (req, res) => {
+  const eventIdx = eventList.findIndex((evt) => {
+    return evt.id === +req.params.id;
+  });
+  eventList[eventIdx].status = "checked";
+  res.status(200).send(eventList);
+});
 
 app.listen(4000, () => console.log("Server running on 4000"));

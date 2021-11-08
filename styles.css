@@ -1,0 +1,40 @@
+.title h1 {
+    font: 600 60px 'calibri';
+    text-align: center;
+    text-shadow: 2px 1px 0 lightgrey, 4px 3px 0 cornflowerblue;
+    margin-top: 20px;
+    margin-bottom: 0px;
+}
+    
+.title h3 {
+    font: 400 30px 'calibri';
+    text-align: center;
+    margin-top: 0px;
+    margin-bottom: 20px;
+}
+
+.days-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.day-box {
+    border: 2px solid black;
+    position: relative;
+    box-shadow: 3px 3px 1px 0 cornflowerblue;
+}
+
+.day-activities {
+    font: 300 15px 'calibri';
+    padding: 8px;
+    font-size: 14px;
+}
+
+#Monday, #Tuesday, #Wednesday, #Thursday, #Friday, #Weekend {
+    padding: 5px 5px 2px;
+    text-align: center;
+    font: 400 30px 'calibri';
+    border-bottom: 2px solid black;
+}

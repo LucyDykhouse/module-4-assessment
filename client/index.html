@@ -69,11 +69,42 @@
           console.log(monthValue.value);
           month.textContent = monthValue.value;
           dates.textContent = dateValue.value;
-
-          monthValue.value = "";
-          dateValue.value = "";
-
         });
+      </script>
+
+      <!--Script to call display function-->
+      <script>
+        const callDispEvt = ({ data: events }) => displayEvts(events);
+      </script>
+
+      <!--Script to display events-->
+      <script>
+        function displayEvts(arr) {
+          let evtBoxes = document.querySelectorAll('ul');
+          for(let i = 0; i < evtBoxes.length; i++) {
+            evtBoxes[i].innerHTML = ``;
+          };
+          for (let i = 0; i < arr.length; i++) {
+            createEvtStructure(arr[i]);
+          }
+        }
+      </script>
+
+      <!--Script to format HTML of events-->
+      <script>
+        function createEvtStructure(evt) {
+          const newEvt = document.createElement('li');
+          if(evt.status === 'unchecked') {
+            newEvt.innerHTML = `${evt.time}: ${evt.name}
+                  <button onclick="deleteEvt(${evt.id})">cancel</button>
+                  <button onclick="updateEvt(${evt.id})">mark complete</button>`;
+          } else {
+            newEvt.innerHTML = `<s>${evt.time}: ${evt.name}</s>
+                  <button onclick="deleteEvt(${evt.id})">cancel</button>`;
+          };
+        let dayOfEvent = document.querySelector(`#${evt.day}-ul`);
+        dayOfEvent.appendChild(newEvt);       
+        };
       </script>
 
       <!--Script to post an event to the calendar-->
@@ -82,14 +113,29 @@
 
         const createEvt = (body) => {
           axios.post("http://localhost:4000/api/events/", body)
-               .then(function(res) {
-                  let newListItem = document.createElement('li');
-                  newListItem.textContent = `${res.data.time}: ${res.data.name}`;
-                  let dayOfEvent = document.querySelector(`#${res.data.day}-ul`);
-                  dayOfEvent.appendChild(newListItem);
-                });
-        }
+                .then(callDispEvt);
+        };
+      </script>
 
+
+      <!--Script to delete an event-->
+      <script>
+        const deleteEvt = (id) => {
+          axios.delete(`http://localhost:4000/api/events/${id}`)
+          .then(callDispEvt);
+        };
+      </script>
+
+      <!--Script to cross off event-->
+      <script>
+        const updateEvt = (id) => {
+          axios.put(`http://localhost:4000/api/events/${id}`)
+          .then(callDispEvt);
+        };
+      </script>
+
+      <!--Script to handle form submission-->
+      <script>
         function submitHandler(e) {
         e.preventDefault();
         let eventBody = document.querySelector("#event");
@@ -107,15 +153,13 @@
         eventBody.value = "";
         eventDay.value = "monday";
         eventTime.value = "";
-        }
+        };
 
         eventForm.addEventListener('submit', submitHandler);
       </script>
-
-
     </div>
 
-    <!--Script to construct calendar-->
+    <!--HTML for constructing calendar-->
     <header class="title"> 
       <h1 id="month">Month</h1>
       <h3 id="dates">Dates</h3>
